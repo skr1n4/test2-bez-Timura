@@ -54,7 +54,6 @@
             outline: none; border-color: #7b2cbf; background: white;
             box-shadow: 0 0 0 4px rgba(123, 44, 191, 0.1);
         }
-        /* Стили для текстового поля (комментарий) */
         textarea.form-control {
             resize: vertical;
             min-height: 100px;
@@ -124,7 +123,6 @@
                     </select>
                 </div>
 
-                <!-- НОВОЕ ПОЛЕ: Комментарий -->
                 <div class="form-group">
                     <label for="message">Комментарий (необязательно)</label>
                     <textarea id="message" name="message" class="form-control" placeholder="Расскажите о вашем проекте, задайте вопрос или опишите пожелания..."></textarea>
@@ -137,25 +135,18 @@
 
    <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. Получаем параметр plan из адресной строки (например, ?plan=Medium)
     const urlParams = new URLSearchParams(window.location.search);
     const planName = urlParams.get('plan');
 
     if (planName) {
-        // 2. Находим все выпадающие списки на странице
         const selects = document.querySelectorAll('select');
         
         selects.forEach(select => {
-            // 3. Проверяем каждую опцию в списке
             for (let i = 0; i < select.options.length; i++) {
-                // Сравниваем текст или значение опции с названием тарифа (без учёта регистра)
                 if (select.options[i].text.toLowerCase() === planName.toLowerCase() || 
                     select.options[i].value.toLowerCase() === planName.toLowerCase()) {
                     
-                    // 4. Выбираем эту опцию
                     select.selectedIndex = i;
-                    
-                    // 5. Сообщаем странице, что значение изменилось (важно для конструкторов сайтов)
                     select.dispatchEvent(new Event('change', { bubbles: true }));
                     break;
                 }
